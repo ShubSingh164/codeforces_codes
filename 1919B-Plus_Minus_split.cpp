@@ -34,3 +34,35 @@ int main() {
 return 0;
 
 }
+
+
+
+Another approach for this code without using stack just simply upadte plus and minus.
+
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+    int t;
+    cin>>t;
+    while(t--){
+        int n;
+        cin>>n;
+        int plus = 0;
+        int minus = 0;
+        char c;
+
+        for (int i = 0; i < n; i++) {
+            cin >> c;
+            if (c == '+') {
+                plus++;
+            } else if (c == '-') {
+                minus++;
+            }
+        }
+
+        cout << abs(plus - minus) << endl;
+    }
+    return 0;
+}
+
