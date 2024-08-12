@@ -1,3 +1,4 @@
+//1684B-(Z mod X = C)
 #include<bits/stdc++.h>
 using namespace std;
 
