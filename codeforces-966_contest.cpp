@@ -133,5 +133,66 @@ int main() {
 
 
 
+/// code for question F
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <climits>
+
+using namespace std;
+
+const int INF = 1e9;
+int dp[1005][105];
+int min_cost[1005][105];
+
+void solve() {
+    int n, k;
+    cin >> n >> k;
+
+    for (int i = 1; i <= n; i++) {
+        int a, b;
+        cin >> a >> b;
+        min_cost[i][0] = 0;
+
+        for (int p = 1; p <= k; p++) {
+            min_cost[i][p] = INF;
+            for (int r = 0; r <= p; r++) {
+                int c = p - r;
+                if (r > a || c > b) continue;
+                min_cost[i][p] = min(min_cost[i][p], r * b + c * a - r * c);
+            }
+        }
+    }
+
+    for (int i = 0; i <= n; i++) {
+        fill(dp[i], dp[i] + k + 1, INF);
+    }
+    dp[0][0] = 0;
+
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j <= k; j++) {
+            if (dp[i][j] == INF) continue; 
+            for (int t = j; t <= k; t++) {
+                dp[i + 1][t] = min(dp[i + 1][t], dp[i][j] + min_cost[i + 1][t - j]);
+            }
+        }
+    }
+
+  
+    if (dp[n][k] == INF) dp[n][k] = -1;
+    cout << dp[n][k] << '\n';
+}
+
+int main() {
+    int t;
+    cin >> t;
+    while (t--) {
+        solve();
+    }
+    return 0;
+}
+
+
+
 
 
